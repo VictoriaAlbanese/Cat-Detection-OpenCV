@@ -1,3 +1,6 @@
+# preprocessing script from https://github.com/AlexiaJM/Deep-learning-with-cats/blob/master/Setting%20up%20the%20data/preprocess_cat_dataset.py
+# modified to fit our needs
+# alignment is done by the eyes
 import cv2
 import glob
 import math
@@ -57,7 +60,7 @@ def preprocessCatFace(coords, image):
 			coords, eyesCenter, eyesAngleRadians)
 
 	# Make the face as wide as the space between the ear bases.
-	w = abs(newCoords[16] - newCoords[6])
+	w = abs(newCoords[16] - newCoords[6]) *2
 	# Make the face square.
 	h = w
 	# Put the center point between the eyes at (0.5, 0.4) in
