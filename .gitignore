@@ -1,8 +1,4 @@
 cat_dataset/**
 cats_bigger_than_64x64/**
-<<<<<<< HEAD
 cats_bigger_than_128x128/**
 src/sift_imgs/**
-=======
-cats_bigger_than_128x128/**
->>>>>>> ff2229fc89dbe283645a172ad8a57ea4a4a70822
