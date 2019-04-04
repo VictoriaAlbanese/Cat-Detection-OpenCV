@@ -49,15 +49,12 @@ def preprocessCatFace(coords, image):
 	eyesAngleDegrees = eyesAngleRadians * 180.0 / math.pi
 
 	# Straighten the image and fill in gray for blank borders.
-	rotation = cv2.getRotationMatrix2D(
-			eyesCenter, eyesAngleDegrees, 1.0)
+	rotation = cv2.getRotationMatrix2D(eyesCenter, eyesAngleDegrees, 1.0)
 	imageSize = image.shape[1::-1]
-	straight = cv2.warpAffine(image, rotation, imageSize,
-							  borderValue=(128, 128, 128))
+	straight = cv2.warpAffine(image, rotation, imageSize, borderValue=(128, 128, 128))
 
 	# Straighten the coordinates of the features.
-	newCoords = rotateCoords(
-			coords, eyesCenter, eyesAngleRadians)
+	newCoords = rotateCoords(coords, eyesCenter, eyesAngleRadians)
 
 	# Make the face as wide as the space between the ear bases.
 	w = abs(newCoords[16] - newCoords[6])
@@ -76,14 +73,17 @@ def preprocessCatFace(coords, image):
 
 	# Crop the face.
 	crop = straight[int(minY):int(minY+h), int(minX):int(minX+w)]
-	# Return the crop.
-	return crop
+
+	# Resize the face.
+	resized = cv2.resize(crop, (256, 256))
+
+	# Return the cropped resized image.
+	return resized
 
 def describePositive():
 	output = open('log.txt', 'w')
 	for imagePath in glob.glob('cat_dataset/*.jpg'):
-		# Open the '.cat' annotation file associated with this
-		# image.
+		# Open the '.cat' annotation file associated with this image.
 		input = open('%s.cat' % imagePath, 'r')
 		# Read the coordinates of the cat features from the
 		# file. Discard the first number, which is the number
