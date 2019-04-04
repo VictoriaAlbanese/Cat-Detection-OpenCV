@@ -2,7 +2,6 @@ import cv2
 import os
 from glob import glob
 import numpy as np
-from sklearn import svm
 
 dataPath = os.getcwd() + "\\cats_bigger_than_64x64\\"
 imgs = [f for f in glob(dataPath + '*') if '.jpg' in f]
