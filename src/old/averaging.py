@@ -3,9 +3,8 @@ import os
 from glob import glob
 import numpy as np
 
-dataPath = os.getcwd() + "\\cats_bigger_than_64x64\\"
+dataPath = os.getcwd() + "\\cats_processed_1000\\"
 images = [f for f in glob(dataPath + '*') if '.jpg' in f]
-
 
 
 average_image = cv2.imread(images[0], 0)
@@ -18,12 +17,20 @@ for i in range(50) :
 cv2.imwrite('src/sift_imgs/average_cat.jpg'.format(i), average_image)
 cv2.imshow("mean image", average_image)
 
-sift = cv2.xfeatures2d.SIFT_create()
-kp = sift.detect(average_image, None)
-img = cv2.drawKeypoints(average_image, kp, average_image)
 
-cv2.imwrite('src/sift_imgs/average_sift.jpg', img)
-cv2.imshow("sift mean image", img)
+kp_image = average_image
+for i in range(50) :
+    next_image = cv2.imread(images[i + 1], 0)
+    sift = cv2.xfeatures2d.SIFT_create()
+    kp = sift.detect(next_image, None)
+    #kp_image = cv2.drawKeypoints(kp_image, kp, kp_image)
+    next_image = cv2.drawKeypoints(next_image, kp, next_image)
+    cv2.imshow("next sift image", next_image)
+
+
+cv2.imwrite('src/sift_imgs/average_sift.jpg', kp_image)
+cv2.imshow("sift mean image", kp_image)
+
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()

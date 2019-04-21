@@ -3,7 +3,7 @@ import os
 from glob import glob
 import numpy as np
 
-dataPath = os.getcwd() + "\\cats_bigger_than_64x64\\"
+dataPath = os.getcwd() + "\\cats_processed_1000\\"
 imgs = [f for f in glob(dataPath + '*') if '.jpg' in f]
 i = 1
 for f in imgs:
