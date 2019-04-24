@@ -13,7 +13,7 @@ import numpy as np
 import cv2
 import os
 
-from feature_extractors import image_to_hog_vector 
+from feature_extractors import HOG_extractor
 
 # input dimensions
 DIM = 324
@@ -35,7 +35,7 @@ for (i, im_path) in enumerate(image_paths) :
     image = io.imread(im_path, True) # read in as grayscale; changed to skimage io from cv2, makes the hog come out better...
     label = im_path.split(os.path.sep)[-1].split(".")[0]
     labels.append(label)
-    features = image_to_hog_vector(image)
+    features = HOG_extractor(image)
     data.append(features)
     if i > 0 and i % 1000 == 0 :
         print("[INFO] processed {}/{}".format(i, len(image_paths)))

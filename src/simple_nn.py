@@ -14,6 +14,7 @@ import os
 
 from feature_extractors import intensity_extractor
 from feature_extractors import DOG_extractor
+from feature_extractors import HOG_extractor
 
 # grab the list of images that we'll be describing
 print("[INFO] describing images...")

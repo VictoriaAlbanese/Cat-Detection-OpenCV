@@ -32,7 +32,7 @@ def DOG_extractor(image, size=(32, 32)) :
 # HOG FEATURE EXTRACTOR FUNCTION
 # finds a histogram of oriented gradients for each image 
 # and uses that as the feature vector for the image 
-def image_to_hog_vector(image, size=(32,32)):
+def HOG_extractor(image, size=(32,32)):
     image = cv2.resize(image, size)
     #gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # tested with (2,2) [accuracy = 49%] and (4,4) [accuracy = 51%] pixels to almost no improvement
