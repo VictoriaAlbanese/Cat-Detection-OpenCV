@@ -15,7 +15,7 @@ def image_to_feature_vector(image, size=(32, 32)):
 def image_to_hog_vector(image, size=(32,32)):
     image = cv2.resize(image, size)
     #gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    # tested with (2,2) [accuracy = ] and (4,4) [accuracy = 51%] pixels to almost no improvement
+    # tested with (2,2) [accuracy = 49%] and (4,4) [accuracy = 51%] pixels to almost no improvement
     hog_arr = hog(image)
     # hog_arr, hog_image = hog(image, pixels_per_cell=(4,4), visualize=True)
     # cv2.imshow("HOG", hog_image)

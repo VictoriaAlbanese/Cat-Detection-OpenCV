@@ -13,7 +13,7 @@ import numpy as np
 import cv2
 import os
 
-from feature_extractors import image_to_feature_vector
+from feature_extractors import image_to_hog_vector 
 
 # input dimensions
 DIM = 324
