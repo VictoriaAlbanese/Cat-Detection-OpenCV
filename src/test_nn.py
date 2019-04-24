@@ -9,7 +9,7 @@ import imutils
 import cv2
 import os
  
-from feature_extractors import image_to_feature_vector
+from feature_extractors import intensity_extractor
 
 
 # initialize the class labels for the Kaggle dogs vs cats dataset
@@ -29,7 +29,7 @@ print("[INFO] testing on images in {}".format(data_path))
 for im_path in image_paths :
 	print("[INFO] classifying {}".format(im_path[im_path.rfind("/") + 1:]))
 	image = cv2.imread(im_path)
-	features = image_to_feature_vector(image) / 255.0
+	features = intensity_extractor(image) / 255.0
 	features = np.array([features])
     
     # classify the image using our extracted features and pre-trained
