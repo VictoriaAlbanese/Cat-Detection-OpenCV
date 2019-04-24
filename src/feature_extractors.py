@@ -1,7 +1,8 @@
 from skimage import filters
 import numpy as np
 import cv2
-
+from skimage.feature import hog
+from skimage import io
 
 # RAW EXTRACTOR FUNCTION
 # this function uses the pixels of the image as they are and then
@@ -23,7 +24,8 @@ def intensity_extractor(image, size=(32, 32)):
     return feature_vector
 
 # DOG FEATURE EXTRACTOR FUNCTION
-# extracts the sift feature vector from the image
+# finds a difference of gaussians for each image and then
+# extracts the feature vector from the image by resizing & flattening
 def DOG_extractor(image, size=(32, 32)) :
     for i in range(2, 4) :
         g1 = filters.gaussian(image, 1.6 * 2**i)

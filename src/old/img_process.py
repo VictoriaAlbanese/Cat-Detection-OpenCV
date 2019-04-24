@@ -9,7 +9,7 @@ from skimage.filters import roberts, sobel
 from skimage.feature import hog
 
 
-dataPath = os.getcwd() + "\\cats_bigger_than_64x64\\"
+dataPath = os.getcwd() + "\\dataset\\training_data\\"
 imgs = [f for f in glob(dataPath + '*') if '.jpg' in f]
 i = 1
 data = []
@@ -18,7 +18,8 @@ for f in imgs:
     image = io.imread(f, True)
     # gets HOG arrays and displayable image
     hog_array, hog_image = hog(image, visualise=True)
-
+    cv2.imshow("HOG", hog_image)
+    cv2.waitKey(0)
     #fig, ax = plt.subplots(ncols=2, sharex=True, sharey=True,
       #                 figsize=(16, 8))
     #ax[0].imshow(hog_image, cmap=plt.cm.gray)
