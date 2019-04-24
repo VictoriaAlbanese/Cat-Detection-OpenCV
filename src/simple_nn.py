@@ -12,8 +12,12 @@ import numpy as np
 import cv2
 import os
 
+from feature_extractors import baseline_extractor
 from feature_extractors import intensity_extractor
 from feature_extractors import DOG_extractor
+from feature_extractors import HOG_extractor
+
+EXTRACTOR = intensity_extractor
 
 # grab the list of images that we'll be describing
 print("[INFO] describing images...")
@@ -32,13 +36,14 @@ for (i, im_path) in enumerate(image_paths) :
     image = cv2.imread(im_path, 0)
     label = im_path.split(os.path.sep)[-1].split(".")[0]
     labels.append(label)
-    features = DOG_extractor(image)
+    features = EXTRACTOR(image)
     data.append(features)
     if i > 0 and i % 100 == 0 :
         print("[INFO] processed {}/{}".format(i, len(image_paths)))
 
-# scale the input image pixels to the range [0, 1]
-data = np.array(data) / 255.0
+# if the extractor is using pixels, extract normalize them
+if EXTRACTOR is HOG_extractor : data = np.array(data)
+else : data = np.array(data) / 255.0
 
 # encode the labels, converting them from strings to integers, 
 # then transform the labels into vectors in the range [0, num_classes] 
@@ -55,9 +60,10 @@ print("[INFO] constructing training/testing split...")
 	data, labels, test_size=0.25, random_state=42)
 
 # define the architecture of the network
+size = data[0].shape[0]
 model = Sequential()
-model.add(Dense(768, input_dim=3072, kernel_initializer="uniform", activation="relu", ))
-model.add(Dense(384, activation="relu", kernel_initializer="uniform"))
+model.add(Dense(256, input_dim=1024, kernel_initializer="uniform", activation="relu", ))
+model.add(Dense(128, activation="relu", kernel_initializer="uniform"))
 model.add(Dense(2))
 model.add(Activation("softmax"))
 
@@ -74,5 +80,5 @@ print("[INFO] loss={:.4f}, accuracy: {:.4f}%".format(loss, accuracy * 100))
  
 # dump the network architecture and weights to file
 print("[INFO] dumping architecture and weights to file...")
-output_path = os.getcwd() + "\\output\\trained_network.hdf5"
+output_path = os.getcwd() + "\\output\\trained_network_{}.hdf5".format(EXTRACTOR.__name__)
 model.save(output_path)
