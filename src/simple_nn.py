@@ -35,11 +35,12 @@ for (i, im_path) in enumerate(image_paths) :
     labels.append(label)
     features = DOG_extractor(image)
     data.append(features)
-    if i > 0 and i % 100 == 0 :
+    if i > 0 and i % 1000 == 0 :
         print("[INFO] processed {}/{}".format(i, len(image_paths)))
+        
 
 # scale the input image pixels to the range [0, 1]
-data = np.array(data) / 255.0
+data = np.array(data) / 255
 
 # encode the labels, converting them from strings to integers, 
 # then transform the labels into vectors in the range [0, num_classes] 
@@ -57,8 +58,8 @@ print("[INFO] constructing training/testing split...")
 
 # define the architecture of the network
 model = Sequential()
-model.add(Dense(768, input_dim=3072, kernel_initializer="uniform", activation="relu", ))
-model.add(Dense(384, activation="relu", kernel_initializer="uniform"))
+model.add(Dense(256, input_dim=1024, kernel_initializer="uniform", activation="relu", ))
+model.add(Dense(128, activation="relu", kernel_initializer="uniform"))
 model.add(Dense(2))
 model.add(Activation("softmax"))
 

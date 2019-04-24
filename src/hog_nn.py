@@ -16,7 +16,7 @@ import os
 from feature_extractors import HOG_extractor
 
 # input dimensions
-DIM = 324
+DIM = 15876
 
 # grab the list of images that we'll be describing
 print("[INFO] describing images...")
@@ -42,7 +42,7 @@ for (i, im_path) in enumerate(image_paths) :
         #break
 
 # scale the input image pixels to the range [0, 1]
-data = np.array(data) / 255.0
+data = np.array(data)
 
 # encode the labels, converting them from strings to integers, 
 # then transform the labels into vectors in the range [0, num_classes] 
