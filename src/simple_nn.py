@@ -12,7 +12,8 @@ import numpy as np
 import cv2
 import os
 
-from feature_extractors import image_to_feature_vector
+from feature_extractors import intensity_extractor
+from feature_extractors import DOG_extractor
 
 # grab the list of images that we'll be describing
 print("[INFO] describing images...")
@@ -28,12 +29,12 @@ labels = []
 #   - extract the label from the image name + add it to the labels list
 # showing an update every 1000 images
 for (i, im_path) in enumerate(image_paths) :
-    image = cv2.imread(im_path)
+    image = cv2.imread(im_path, 0)
     label = im_path.split(os.path.sep)[-1].split(".")[0]
     labels.append(label)
-    features = image_to_feature_vector(image)
+    features = DOG_extractor(image)
     data.append(features)
-    if i > 0 and i % 1000 == 0 :
+    if i > 0 and i % 100 == 0 :
         print("[INFO] processed {}/{}".format(i, len(image_paths)))
 
 # scale the input image pixels to the range [0, 1]
