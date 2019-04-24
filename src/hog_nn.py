@@ -1,6 +1,7 @@
 # import the necessary packages
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
+from skimage import io
 from keras.models import Sequential
 from keras.layers import Activation
 from keras.optimizers import SGD
@@ -13,6 +14,9 @@ import cv2
 import os
 
 from feature_extractors import image_to_feature_vector
+
+# input dimensions
+DIM = 324
 
 # grab the list of images that we'll be describing
 print("[INFO] describing images...")
@@ -28,10 +32,10 @@ labels = []
 #   - extract the label from the image name + add it to the labels list
 # showing an update every 1000 images
 for (i, im_path) in enumerate(image_paths) :
-    image = cv2.imread(im_path)
+    image = io.imread(im_path, True) # read in as grayscale; changed to skimage io from cv2, makes the hog come out better...
     label = im_path.split(os.path.sep)[-1].split(".")[0]
     labels.append(label)
-    features = image_to_feature_vector(image, 'hog')
+    features = image_to_hog_vector(image)
     data.append(features)
     if i > 0 and i % 1000 == 0 :
         print("[INFO] processed {}/{}".format(i, len(image_paths)))
@@ -56,8 +60,8 @@ print("[INFO] constructing training/testing split...")
 
 # define the architecture of the network
 model = Sequential()
-model.add(Dense(768, input_dim=324, kernel_initializer="uniform", activation="relu", ))
-model.add(Dense(384, activation="relu", kernel_initializer="uniform"))
+model.add(Dense(int(DIM/4), input_dim=DIM, kernel_initializer="uniform", activation="relu", ))
+model.add(Dense(int(DIM/2), activation="relu", kernel_initializer="uniform"))
 model.add(Dense(2))
 model.add(Activation("softmax"))
 

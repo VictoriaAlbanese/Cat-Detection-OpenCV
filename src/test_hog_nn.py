@@ -11,13 +11,12 @@ import os
  
 from feature_extractors import image_to_feature_vector
 
-
 # initialize the class labels for the Kaggle dogs vs cats dataset
 CLASSES = ["cat", "dog"]
  
 # load the network
 print("[INFO] loading network architecture and weights...")
-model_path = os.getcwd() + "\\output\\trained_network.hdf5"
+model_path = os.getcwd() + "\\output\\trained_hog_network.hdf5"
 model = load_model(model_path)
 
 # load the images
