@@ -40,7 +40,7 @@ for im_path in image_paths :
     # to our screen
 	label = "{}: {:.2f}%".format(CLASSES[prediction], probs[prediction] * 100)
 	i += 1
-	if i < 10:
+	if i < 100:
 		cv2.putText(image, label, (10, 35), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 0), 3)
 		cv2.imshow("Image", image)
 		cv2.waitKey(0)

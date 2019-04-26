@@ -6,6 +6,7 @@ from keras.models import Sequential
 from keras.layers import Activation
 from keras.optimizers import SGD
 from keras.layers import Dense
+from keras.layers import Dropout
 from keras.utils import np_utils
 from imutils import paths
 from glob import glob
@@ -16,7 +17,7 @@ import os
 from feature_extractors import HOG_extractor
 
 # input dimensions
-DIM = 15876
+DIM = 5184
 
 # grab the list of images that we'll be describing
 print("[INFO] describing images...")
@@ -61,7 +62,9 @@ print("[INFO] constructing training/testing split...")
 # define the architecture of the network
 model = Sequential()
 model.add(Dense(int(DIM/4), input_dim=DIM, kernel_initializer="uniform", activation="relu", ))
+model.add(Dropout(0.2))
 model.add(Dense(int(DIM/2), activation="relu", kernel_initializer="uniform"))
+model.add(Dropout(0.2))
 model.add(Dense(2))
 model.add(Activation("softmax"))
 

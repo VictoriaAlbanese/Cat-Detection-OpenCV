@@ -20,17 +20,17 @@ for f in imgs:
     hog_array, hog_image = hog(image, visualise=True)
     cv2.imshow("HOG", hog_image)
     cv2.waitKey(0)
-    #fig, ax = plt.subplots(ncols=2, sharex=True, sharey=True,
-      #                 figsize=(16, 8))
-    #ax[0].imshow(hog_image, cmap=plt.cm.gray)
-    #ax[0].set_title('HOG ME')
+    fig, ax = plt.subplots(ncols=2, sharex=True, sharey=True,
+                       figsize=(16, 8))
+    ax[0].imshow(hog_image, cmap=plt.cm.gray)
+    ax[0].set_title('HOG ME')
     
     # experimenting with sobel edge detection...
     edge_sobel = sobel(image)
-    #ax[1].imshow(edge_sobel, cmap=plt.cm.gray)
-    #ax[1].set_title('Sobel Edge Detection')
+    ax[1].imshow(edge_sobel, cmap=plt.cm.gray)
+    ax[1].set_title('Sobel Edge Detection')
     # uncomment plt stuff to view pretty pictures:
-    #plt.show()
+    plt.show()
 
     data.append(hog_array)
    
@@ -38,7 +38,7 @@ for f in imgs:
     if i == 10:
         break
 
-from sklearn import svm
+""" from sklearn import svm
 labels = [1 for j in range(i)]
 labels = np.array(labels)
 data = np.array(data)
@@ -52,7 +52,7 @@ x_train, x_test = data_frame[:partition,:-1],  data_frame[partition:,:-1]
 y_train, y_test = data_frame[:partition,-1:].ravel(), data_frame[partition:,-1:].ravel()
 model = svm.SVC(gamma='scale')
 model.fit(x_train, y_train)
-model.predict(x_test)
+model.predict(x_test) """
 
 # pad arrays with 0s so they are normalized
 # max_len = max((len(l), f) for f, l in enumerate(data))[0]

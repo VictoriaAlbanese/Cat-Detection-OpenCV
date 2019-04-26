@@ -34,8 +34,7 @@ def DOG_extractor(image, size=(32, 32)) :
 # and uses that as the feature vector for the image 
 def HOG_extractor(image, size=(32,32)):
     image = cv2.resize(image, size)
-    # tested with (2,2) [accuracy = 49%] and (4,4) [accuracy = 51%] pixels to almost no improvement
-    hog_arr = hog(image, pixels_per_cell=(2,2))
+    hog_arr = hog(image, pixels_per_cell=(3,3))
 
     # hog_arr, hog_image = hog(image, pixels_per_cell=(4,4), visualize=True)
     # cv2.imshow("HOG", hog_image)
