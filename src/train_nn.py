@@ -1,17 +1,26 @@
 # import the necessary packages
-import feature_extractors
 import nn_functions as nn
-EXTRACTOR = feature_extractors.image_intensity
+from feature_extractors import baseline_extractor
+from feature_extractors import intensity_extractor
+from feature_extractors import edge_extractor
+from feature_extractors import DOG_extractor
+from feature_extractors import HOG_extractor
 
-# load the images, extracting the features along the way
-data_path = nn.get_full_path("\\dataset\\training_data\\")
-print("[INFO] loading images in {}".format(data_path))
-(X, y) = nn.extract_image_data(data_path, EXTRACTOR)
+EXTRACTOR = intensity_extractor
 
-# partition the data into training data (75%) and testing data (25%)
-print("[INFO] constructing training/testing split...")
-(X_training, X_testing, y_training, y_testing) = split_data(X, y, 0.25)
+# load the images
+data_path = "\\dataset\\training_data\\"
+print("[INFO] loading images in {}".format(nn.get_full_path(data_path)))
+X, y = nn.extract_image_data(data_path, EXTRACTOR, debug=True)
 
-# make the neural network model & train it 
-model = nn.craft_model(len(y))
-model_file = nn.train_model(model, X_training, y_training, EXTRACTOR.__name__)
+# define the architecture of the network
+print("[INFO] crafting model...")
+size = 1024
+if EXTRACTOR is DOG_extractor : size = 3072
+if EXTRACTOR is HOG_extractor : size = 324
+model = nn.craft_model(size)
+
+# train the model & save to file
+print("[INFO] training model...")
+model_filename = nn.train_model(model, X, y, EXTRACTOR.__name__)
+print("[INFO] saving architecture & weights to {}".format(model_filename))
