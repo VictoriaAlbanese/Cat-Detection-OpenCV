@@ -1,12 +1,22 @@
-# import the necessary packages
+################################################################
+#
+# Filename: train_nn.py
+#
+# Purpose: Contains code which trains a fully connected neural 
+# network with some training data that needs to be classified
+#
+################################################################
+
 import nn_functions as nn
 from feature_extractors import baseline_extractor
-from feature_extractors import intensity_extractor
+from feature_extractors import threshold_extractor
 from feature_extractors import edge_extractor
 from feature_extractors import DOG_extractor
 from feature_extractors import HOG_extractor
 
-EXTRACTOR = intensity_extractor
+EXTRACTOR = threshold_extractor
+
+################################################################
 
 # load the images
 data_path = "\\dataset\\training_data\\"
@@ -24,3 +34,5 @@ model = nn.craft_model(size)
 print("[INFO] training model...")
 model_filename = nn.train_model(model, X, y, EXTRACTOR.__name__)
 print("[INFO] saving architecture & weights to {}".format(model_filename))
+
+################################################################

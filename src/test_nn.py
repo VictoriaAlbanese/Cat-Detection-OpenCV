@@ -1,19 +1,29 @@
-# import the necessary packages
+################################################################
+#
+# Filename: test_nn.py
+#
+# Purpose: Contains code which loads a previosuly trained 
+# neural network and tests it on unseen testing data, running
+# some metrics on the results
+#
+################################################################
+ 
 from sklearn.metrics import roc_curve, auc, confusion_matrix, classification_report
 from keras.models import load_model
 import matplotlib.pyplot as plt
 import numpy as np
 
 import nn_functions as nn
-
 from feature_extractors import baseline_extractor
-from feature_extractors import intensity_extractor
+from feature_extractors import threshold_extractor
 from feature_extractors import edge_extractor
 from feature_extractors import DOG_extractor
 from feature_extractors import HOG_extractor
 
 EXTRACTOR = intensity_extractor
 CLASSES = ["cat", "dog"]
+
+################################################################
 
 # load the network
 print("[INFO] loading network architecture and weights...")
@@ -74,3 +84,5 @@ plt.title('Receiver operating characteristic example')
 plt.legend(loc="lower right")
 plt.show()
 '''
+
+################################################################
