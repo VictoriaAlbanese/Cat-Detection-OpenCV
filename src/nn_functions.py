@@ -13,13 +13,14 @@ from sklearn.preprocessing import LabelEncoder
 from keras.models import load_model
 from keras.models import Sequential
 from keras.layers import Activation
-from keras.optimizers import SGD
 from keras.layers import Dense
+from keras.optimizers import SGD
 from keras.utils import np_utils
 from skimage import io
 from glob import glob
 import numpy as np
 import os
+import feature_extractors as fe
 
 LEARNING_RATE = 0.01
 NUM_EPOCHS = 50
@@ -36,8 +37,7 @@ def get_full_path(relative_path) :
 # this function returns a list of the locations of all 
 # the images at the location pointed to by the given path
 def load_image_paths(dataset_path) :
-    full_path = get_full_path(dataset_path)
-    image_paths = [i for i in glob(full_path + '*') if '.jpg' in i]
+    image_paths = [i for i in glob(dataset_path + '*') if '.jpg' in i]
     np.random.shuffle(image_paths)
     return image_paths
 
@@ -54,7 +54,7 @@ def extract_image_data(dataset_path, extractor, debug=False) :
         X.append(extractor(image))
         y.append(image_path.split(os.path.sep)[-1].split(".")[0])
         if i > 0 and i % 1000 == 0 :
-            print("[INFO] processed {}%".format(i / len(image_paths)))
+            print("[INFO] processed {}%".format(i / len(image_paths) * 100))
             if debug : break
     X = np.array(X)
     y = encoder.fit_transform(y)
@@ -76,18 +76,17 @@ def craft_model(size) :
 # this function trains the model in 50 epochs
 # printing out lots of useful information along the way
 # and saving the finished model to a file for convenience
-def train_model(model, X, y, description) :
+def train_model(model, X, y) :
     model.compile(loss="binary_crossentropy", optimizer=SGD(lr=LEARNING_RATE), metrics=["accuracy"])
     model.fit(X, y, epochs=NUM_EPOCHS, batch_size=BATCH_SIZE, verbose=1)
-    output_path = get_full_path("\\output\\nn_" + description + ".hdf5")
-    model.save(output_path)
-    return output_path
+    model.save(MODEL_SAVE_LOCATION)
 
-# MAKE PREDICTIONS FUNCTION
-# this model makes predictions on the first n_predict
-# number of given images using the given model
-#def make_predictions(model, images, n_predict) :
+################################################################
 
-    
+EXTRACTOR = fe.baseline_extractor
+
+TRAINING_DATA_LOCATION = get_full_path("\\dataset\\training_data\\")
+TEST_DATA_LOCATION = get_full_path("\\dataset\\test_data\\")
+MODEL_SAVE_LOCATION = get_full_path("\\output\\trained_nns\\nn_{}.hdf5".format(EXTRACTOR.__name__))
 
 ################################################################
