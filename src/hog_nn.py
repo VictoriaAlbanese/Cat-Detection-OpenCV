@@ -80,9 +80,9 @@ test_labels = np_utils.to_categorical(test_labels, 2)
 # define the architecture of the network
 model = Sequential()
 model.add(Dense(int(DIM/4), input_dim=DIM, kernel_initializer="uniform", activation="relu", ))
-#model.add(Dropout(0.2))
+#model.add(Dropout(0.5))
 model.add(Dense(int(DIM/8), activation="relu", kernel_initializer="uniform"))
-#model.add(Dropout(0.2))
+#model.add(Dropout(0.5))
 model.add(Dense(2))
 model.add(Activation("softmax"))
 

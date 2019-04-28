@@ -13,8 +13,8 @@ from skimage import transform
 from skimage import filters
 from skimage import feature
 from skimage import io
+from skimage.feature import hog
 
-<<<<<<< HEAD
 ################################################################
 
 # RAW EXTRACTOR FUNCTION
@@ -46,18 +46,6 @@ def edge_extractor(image, size=(32, 32)):
     #io.imshow(sobel_image)
     #plt.show()
     feature_vector = transform.resize(sobel_image, size).flatten()
-=======
-# INTENSITY EXTRACTOR FUNCTION
-# this version of the function resizes the image into 
-# a 32x32 pixel image with 3 color channels, and then flattens
-# it into a 1D list of size 32x32x3 = 3072D feature vector
-# and scale the input image pixels to the range [0, 1]
-def intensity_extractor(image, size=(32, 32)):
-    ret, binary_image = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
-    #cv2.imshow("BINARY IMAGE", binary_image)
-    #cv2.waitKey(0)
-    feature_vector = cv2.resize(binary_image, size).flatten()
->>>>>>> hannah-dev
     return feature_vector
 
 # DOG FEATURE EXTRACTOR FUNCTION
@@ -78,26 +66,10 @@ def DOG_extractor(image, size=(32, 32)) :
 # finds a histogram of oriented gradients for each image 
 # and uses that as the feature vector for the image 
 def HOG_extractor(image, size=(32,32)) :
-    image = cv2.resize(image, size)
-<<<<<<< HEAD
-    hog_arr, hog_image = hog(image, pixels_per_cell=(4,4), visualize=True)
+    image = transform.resize(image, size)
+    hog_arr = hog(image, pixels_per_cell=(4,4))
     #io.imshow(hog_image)
     #plt.show()
     return hog_arr
 
 ################################################################
-=======
-    hog_arr = hog(image, pixels_per_cell=(3,3))
-
-    # hog_arr, hog_image = hog(image, pixels_per_cell=(4,4), visualize=True)
-    # cv2.imshow("HOG", hog_image)
-    # cv2.waitKey(0)
-    return hog_arr
-
-image = io.imread("C:/Users/Hannah/Documents/computervisionfinal/Cat-Detection-OpenCV/dataset/training_data/cat.3125.jpg", True)
-#image = cv2.resize(image, (32,32))
-#v = image_to_feature_vector(image)
-v2 = HOG_extractor(image)
-#print(len(v))
-print(len(v2))
->>>>>>> hannah-dev
