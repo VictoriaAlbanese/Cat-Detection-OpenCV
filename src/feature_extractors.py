@@ -41,7 +41,7 @@ def HOG_extractor(image, size=(32,32)):
     # cv2.waitKey(0)
     return hog_arr
 
-image = io.imread("C:/Users/Hannah/Documents/computervisionfinal/Cat-Detection-OpenCV/dataset/training_data/cat.0.jpg", True)
+image = io.imread("C:/Users/Hannah/Documents/computervisionfinal/Cat-Detection-OpenCV/dataset/training_data/cat.3125.jpg", True)
 #image = cv2.resize(image, (32,32))
 #v = image_to_feature_vector(image)
 v2 = HOG_extractor(image)

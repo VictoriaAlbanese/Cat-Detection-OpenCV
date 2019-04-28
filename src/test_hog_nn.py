@@ -27,7 +27,7 @@ i = 0
 # loop over our testing images
 for im_path in image_paths :
 	print("[INFO] classifying {}".format(im_path[im_path.rfind("/") + 1:]))
-	image = cv2.imread(im_path)
+	image = io.imread(im_path)
 	features = HOG_extractor(image)
 	features = np.array([features])
     
