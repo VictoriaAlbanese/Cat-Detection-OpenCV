@@ -83,10 +83,14 @@ def train_model(model, X, y) :
 
 ################################################################
 
-EXTRACTOR = fe.baseline_extractor
+EXTRACTOR = fe.HOG_extractor
+PIXELS_PER_CELL = "4x4"
 
 TRAINING_DATA_LOCATION = get_full_path("\\dataset\\training_data\\")
 TEST_DATA_LOCATION = get_full_path("\\dataset\\test_data\\")
-MODEL_SAVE_LOCATION = get_full_path("\\output\\trained_nns\\nn_{}.hdf5".format(EXTRACTOR.__name__))
+if EXTRACTOR == fe.HOG_extractor:
+    MODEL_SAVE_LOCATION = get_full_path("\\output\\trained_nns\\nn_{}_{}.hdf5".format(EXTRACTOR.__name__, PIXELS_PER_CELL))
+else:
+    MODEL_SAVE_LOCATION = get_full_path("\\output\\trained_nns\\nn_{}.hdf5".format(EXTRACTOR.__name__))
 
 ################################################################

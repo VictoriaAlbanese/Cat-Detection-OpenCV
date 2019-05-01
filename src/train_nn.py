@@ -18,13 +18,13 @@ from feature_extractors import HOG_extractor
 
 # load the images
 print("[INFO] loading images in {}".format(nn.TRAINING_DATA_LOCATION))
-X, y = nn.extract_image_data(nn.TRAINING_DATA_LOCATION, nn.EXTRACTOR, debug=True)
+X, y = nn.extract_image_data(nn.TRAINING_DATA_LOCATION, nn.EXTRACTOR, debug=False)
 
 # define the architecture of the network
 print("[INFO] crafting model...")
 size = 1024
 if nn.EXTRACTOR is DOG_extractor : size = 3072
-if nn.EXTRACTOR is HOG_extractor : size = 324
+if nn.EXTRACTOR is HOG_extractor : size = 2916   #3x3 5184 #4x4 2916   #8x8 324
 model = nn.craft_model(size)
 
 # train the model & save to file
