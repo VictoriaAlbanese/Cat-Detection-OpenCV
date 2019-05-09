@@ -1,10 +1,48 @@
-# Cat-Detection-OpenCV
-This repository contains our Computer Vision final project where we detect cat faces utilizing OpenCV.
-
+# Cat-vs-Dog-Classifier
+This repository contains our Computer Vision final project where we classify images of cats and dogs utilizing Tensorflow and Scikit-Image.
+Project created by Victoria Albanese and Hannah Chiodo, 2019
 -------------------
 
-We got our dataset from here: https://www.kaggle.com/c/dogs-vs-cats/data
+Dataset Source: https://www.kaggle.com/c/dogs-vs-cats/data
 
-Our jumping off point is this tutorial: https://www.pyimagesearch.com/2016/09/26/a-simple-neural-network-with-python-and-keras/
+Dataset directory structure is "{project location}\dataset\test_data" and "{project location}\dataset\training_data"
 
-Our contribution is adding better feature extractors to improve the overall performance of the algorithm.  Currently, the image is just resized, flattened into a 1D array, and sent into the neural net.  We believe that this could be optimized by developing better feature vectors to feed to the program (especially since the image is distorted with the current method, which surely skews the results).
+Python version: 3.6.4
+
+Required packages:
+    -keras
+    -sklearn
+    -skimage
+
+Code execution:
+    1) Split dataset manually: test_data should contain cats and dogs 0-3124. The rest go in training_data
+    2) Creating the models: run nn_functions.py for the desired extractor (i.e. EXTRACTOR = fe.HOG_extractor). For the HOG, set         PIXELS_PER_CELL to the desired value, i.e. "4x4"
+    3) Testing the models: run test_nn.py for the desired model. The model type is the one set in nn_functions.py
+
+We used this tutorial as a jumping off point: https://www.pyimagesearch.com/2016/09/26/a-simple-neural-network-with-python-and-keras/
+
+
+   ,';,               ,';,
+ ,' , :;             ; ,,.;
+ | |:; :;           ; ;:|.|
+ | |::; ';,,,,,,,,,'  ;:|.|    ,,,;;;;;;;;,,,
+ ; |''  ___      ___   ';.;,,''             ''';,,,
+ ',:   /   \    /   \    .;.                      '';,
+ ;    /    |    |    \     ;,                        ';,
+;    |    /|    |\    |    :|                          ';,
+|    |    \|    |/    |    :|     ,,,,,,,               ';,
+|     \____| __ |____/     :;  ,''                        ;,
+;           /  \          :; ,'                           :;
+ ',        `----'        :; |'                            :|
+   ',,  `----------'  ..;',|'                             :|
+  ,'  ',,,,,,,,,,,;;;;''  |'                              :;
+,'  ,,,,                  |,                              :;
+| ,'   :;, ,,''''''''''   '|.   ...........                ';,
+;       :;|               ,,';;;''''''                      ';,
+ ',,,,,;;;|.............,'                          ....      ;,
+           ''''''''''''|        .............;;;;;;;''''',    ':;
+                       |;;;;;;;;'''''''''''''             ;    :|
+                                                      ,,,'     :;
+                                          ,,,,,,,,,,''       .;'
+                                         |              .;;;;'
+                                         ';;;;;;;;;;;;;;'

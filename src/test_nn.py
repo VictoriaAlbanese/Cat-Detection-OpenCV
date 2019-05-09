@@ -2,7 +2,7 @@
 #
 # Filename: test_nn.py
 #
-# Purpose: Contains code which loads a previosuly trained 
+# Purpose: Contains code which loads a previously trained 
 # neural network and tests it on unseen testing data, running
 # some metrics on the results
 #

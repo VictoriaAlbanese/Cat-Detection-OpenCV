@@ -1,5 +1,4 @@
 dataset/**
-src/old/sift_imgs/**
 src/__pycache__/**
 .vscode/**
 log.txt

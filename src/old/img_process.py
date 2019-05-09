@@ -35,7 +35,7 @@ for f in imgs:
     data.append(hog_array)
    
     i += 1
-    if i == 10:
+    if i == 15:
         break
 
 """ from sklearn import svm
