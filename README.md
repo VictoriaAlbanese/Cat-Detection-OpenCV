@@ -5,6 +5,10 @@ Project created by Victoria Albanese and Hannah Chiodo (2019)
 
 Dataset Source: https://www.kaggle.com/c/dogs-vs-cats/data
 
+Paper: https://docs.google.com/document/d/1FdlxyWHFFI08Zrb3GElL8cCfKouTdnqnseJMfkwAaSU/edit?usp=sharing
+
+Presentation Slides: https://docs.google.com/presentation/d/1bKwMss2SqnEfuqEztXtnBpc3USlz1AN5UPHB_fzIUXc/edit?usp=sharing
+
 Dataset directory structure is "{project location}\dataset\test_data" and "{project location}\dataset\training_data"
 
 Python version: 3.6.4
